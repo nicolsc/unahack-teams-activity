@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sigfox - Group Activity Monitor</title>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.orange-purple.min.css">
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/style.css">
+    <script type="text/javascript" src="/index.js"></script>
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--scroll">
+        <div class="mdl-layout__header-row">
+          <img class="starting-logo dark-version " alt="#UnaHack1" src="http://unahack.unabiz.com/wp-content/uploads/2017/01/unahack1.png" style="height: 36px;">
+          <span class="mdl-layout-title">Teams activity</span>
+          <div class="mdl-layout-spacer"></div>
+
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+
+          <div class="mdl-cell mdl-cell--12-col">
+            <div class="mdl-grid">
+              {{#each deviceTypes}}
+
+                <div class="mdl-card mdl-shadow--2dp">
+                  <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text"><a target="_blank" href="//backend.sigfox.com/devicetype/{{deviceType.id}}">{{deviceType.name}}</A></h2>
+                  </div>
+                  <div class="mdl-card__supporting-text">
+                    {{messages.length}} messages
+                    {{#if messages.length}}
+                      <br />Last message:  {{messages.0.date}}
+                    {{/if}}
+                  </div>
+                  <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-js-button mdl-js-ripple-effect btn-show-more">View messages history</a>
+                  </div>
+                  <table class="hidden mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Device</th>
+                        <th>Date</th>
+                        <th>Frame</th>
+                        <!-- <th>Link Quality</th> -->
+                        <th>Callbacks</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {{#each messages}}
+                      <tr>
+                        <td>{{deviceId}}</td>
+                        <td>{{date}}</td>
+                        <td>{{frame}}</td>
+                        <!-- <td>{{linkQuality}}</td> -->
+                        <td>
+                          {{#each callbacks}}
+
+                          {{/each}}
+                        </td>
+                        <td>{{location}}</td>
+                      </tr>
+                    {{/each}}
+                    </tbody>
+                  </table>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+      </main>
+    </div>
+  </body>
+</html>
